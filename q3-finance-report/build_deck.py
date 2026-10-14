@@ -137,6 +137,8 @@ def total_row(label, vals, pct, remark):
     return cells
 
 # ---------- derived figures ----------
+def nonzero(rows):  # hide lines with no amount in any month
+    return [(n, v) for n, v in rows if any(abs(x) >= 0.005 for x in v)]
 paid_m = [sum(v[i] for _, v in PAID) for i in range(3)]
 rec_q, paid_q = sum(RECEIPTS_TOTAL), sum(paid_m)
 ops_q, inv_q, fin_q, net_q = sum(NET_OPS), sum(NET_INV), sum(NET_FIN), sum(NET_CASH)
@@ -200,7 +202,7 @@ rem2 = {
     "Royalty": "Declined Aug-Sep, in line with royalty discount",
     "Other operations": "Stable at about RM42K every month",
 }
-rows2 = [data_row(n, v, sum(v) / rec_q, rem2[n]) for n, v in RECEIPTS]
+rows2 = [data_row(n, v, sum(v) / rec_q, rem2[n]) for n, v in nonzero(RECEIPTS)]
 rows2.append(total_row("TOTAL CASH RECEIPTS", RECEIPTS_TOTAL, 1.0, "Sep highest; Jul lowest"))
 table(s, L, 2.04, cols2, [0.5] + [0.64] * 5, ["Account", "Jul-26", "Aug-26", "Sep-26", "Q3 Total", "% of Q3", "Compare / Remarks"],
       rows2, size=10.5, header_size=10.5)
@@ -242,12 +244,12 @@ rem3 = {
     "SST": "Paid in Jul and Sep; none in Aug",
     "Donation": "No payment in Q3",
 }
-rows3 = [data_row(n, v, sum(v) / paid_q, rem3[n], signed=False) for n, v in PAID]
+rows3 = [data_row(n, v, sum(v) / paid_q, rem3[n], signed=False) for n, v in nonzero(PAID)]
 rows3.append(total_row("TOTAL CASH PAID", paid_m, 1.0, "Jul highest; Aug lowest (no SST)"))
 # totals row shows outflows as positive, like the template
 rows3[-1] = [rows3[-1][0]] + [(money(v), GOLD, INK, True, R) for v in paid_m + [paid_q]] + rows3[-1][5:]
-table(s, L, 1.74, cols3, [0.22] + [0.205] * 21, ["Account", "Jul-26", "Aug-26", "Sep-26", "Q3 Total", "% Paid", "Compare / Remarks"],
-      rows3, size=8.5, header_size=8.5)
+table(s, L, 1.74, cols3, [0.26] + [0.245] * len(rows3), ["Account", "Jul-26", "Aug-26", "Sep-26", "Q3 Total", "% Paid", "Compare / Remarks"],
+      rows3, size=9, header_size=9)
 top = sorted(PAID, key=lambda kv: -sum(kv[1]))[:5]
 rect(s, L, 6.6, W, 0.48, WHITE, BORDER)
 text(s, L + 0.12, 6.6, W - 0.24, 0.48,
@@ -272,10 +274,11 @@ rem_inv = {
     "Placement of Fixed Deposit": "RM2.0M placed in fixed deposit in Sep",
     "Purchase of investment": "",
 }
-section_bar(s, 1.48, "Investing Activities", h=0.22, size=10.5)
-rows4 = [data_row(n, v, sum(abs(x) for x in v) / inv_abs, rem_inv[n]) for n, v in INVESTING]
+section_bar(s, 1.5, "Investing Activities", h=0.26, size=11)
+rows4 = [data_row(n, v, sum(abs(x) for x in v) / inv_abs, rem_inv[n]) for n, v in nonzero(INVESTING)]
 rows4.append(total_row("NET INVESTING ACTIVITIES", NET_INV, 1.0, "Sep-26 highest outflow; Aug-26 lowest"))
-table(s, L, 1.7, cols4, [0.2] * (len(rows4) + 1), hdr4, rows4, size=8, header_size=8)
+table(s, L, 1.76, cols4, [0.3] * (len(rows4) + 1), hdr4, rows4, size=9.5, header_size=9.5)
+fin_y = 1.76 + 0.3 * (len(rows4) + 1) + 0.3
 
 fin_abs = sum(abs(x) for _, v in FINANCING for x in v)
 rem_fin = {
@@ -288,10 +291,10 @@ rem_fin = {
     "Advance to related parties": "Jul-26 highest; Aug-26 minimal",
     "Repayment to related parties": "", "Pending": "",
 }
-section_bar(s, 3.86, "Financing Activities", h=0.22, size=10.5)
-rows5 = [data_row(n, v, sum(abs(x) for x in v) / fin_abs, rem_fin[n]) for n, v in FINANCING]
+section_bar(s, fin_y, "Financing Activities", h=0.26, size=11)
+rows5 = [data_row(n, v, sum(abs(x) for x in v) / fin_abs, rem_fin[n]) for n, v in nonzero(FINANCING)]
 rows5.append(total_row("NET FINANCING ACTIVITIES", NET_FIN, 1.0, "Aug-26 positive; Jul-26 lowest"))
-table(s, L, 4.08, cols4, [0.2] * (len(rows5) + 1), hdr4, rows5, size=8, header_size=8)
+table(s, L, fin_y + 0.26, cols4, [0.3] * (len(rows5) + 1), hdr4, rows5, size=9.5, header_size=9.5)
 
 prs.save(OUT)
 print("saved", OUT, "| rec", rec_q, "paid", paid_q, "capex", capex, "sst", sst, "top", [(n, round(sum(v))) for n, v in top])
