@@ -59,7 +59,7 @@ def frame(title, headline, headline_size=11):
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
     r = p.add_run(); r.text = "Q3 2026"; r.font.name = FONT; r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = rgb(NAVY)
     text(s, L, 1.13, W, 0.32, [[(headline, True, INK, headline_size)]])
-    text(s, L, 7.3, 8, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026", False, MUTED, 5.5)]])
+    text(s, L, 7.3, 8, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (September revised upload)", False, MUTED, 5.5)]])
     return s
 
 def section_bar(s, y, label, h=0.24, size=10.5):
@@ -191,12 +191,12 @@ text(s, L + 0.12, 6.35, W - 0.24, 0.48,
 # ---------- Slide 2: Cash Receipts ----------
 s = frame("Financial Performance: Cash Receipts Comparison",
           f"Total cash receipts increased every month, from {M(RECEIPTS_TOTAL[0])} in July to {M(RECEIPTS_TOTAL[2])} in September. "
-          "Royalty declined after July.", 12)
+          "Royalty declined after July.", 11.5)
 section_bar(s, 1.68, "Operations: Cash Receipts From", h=0.36, size=11)
 cols2 = [2.6, 1.3, 1.3, 1.3, 1.5, 0.85, 3.92]
 rem2 = {
     "Customers & Sales": "Grew every month; Sep-26 highest",
-    "Licensing fee & package": "No receipts in Jul; RM120K licensing fee in Sep",
+    "Licensing fee & package": "Nil in Jul; Sep RM120K fee + RM200K package",
     "Royalty": "Declined Aug-Sep, in line with royalty discount",
     "Other operations": "Stable at about RM42K every month",
 }
@@ -210,7 +210,7 @@ text(s, L + 0.2, 6.1, 6.1, 0.95, [
     [("Receipts insights", True, INK, 10)],
     [(f"• Customers & Sales contributed {cust_share:.1%} of Q3 receipts.", False, INK, 8.5)],
     [(f"• Royalty fell from {K(roy[0])} in July to {K(roy[2])} in September.", False, INK, 8.5)],
-    [(f"• Licensing fee receipts rose from nil in July to {K(lic[2])} in September.", False, INK, 8.5)],
+    [(f"• Licensing fee & package receipts rose from nil in July to {K(lic[2])} in September.", False, INK, 8.5)],
     [(f"• Other operations stayed stable at {K(min(oth))}-{K(max(oth))} per month.", False, INK, 8.5)],
 ])
 
@@ -265,7 +265,7 @@ inv_abs = sum(abs(x) for _, v in INVESTING for x in v)
 rem_inv = {
     "Proceeds from sale of motor vehicle": "Disposal of motor vehicle in Jul",
     "Interest received (Maybank pooled)": "Interest from Maybank pooled account",
-    "Collection of Investor funds": "Investor fund; Sep received via RHB",
+    "Collection of Investor funds": "Investor fund received in Jul",
     "Sale of investment securities": "",
     "Purchase of property and equipment": "Reduced every month",
     "Capex New Branches": "For outlet expansion; Jul-26 highest",

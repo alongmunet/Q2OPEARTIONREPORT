@@ -3,11 +3,11 @@ MONTHS = ["Jul-26", "Aug-26", "Sep-26"]
 
 RECEIPTS = [
     ("Customers & Sales",        [8815311.78, 9420302.14, 9459935.84]),
-    ("Licensing fee & package",  [0.00, 10000.00, 120000.00]),
+    ("Licensing fee & package",  [0.00, 10000.00, 320000.00]),
     ("Royalty",                  [369866.18, 327715.27, 296844.55]),
     ("Other operations",         [42221.20, 41533.15, 42836.78]),
 ]
-RECEIPTS_TOTAL = [9227399.16, 9799550.56, 9919617.17]
+RECEIPTS_TOTAL = [9227399.16, 9799550.56, 10119617.17]
 
 PAID = [  # positive = cash out
     ("Inventory purchases",          [4918792.44, 5000785.79, 4224003.99]),
@@ -31,19 +31,19 @@ PAID = [  # positive = cash out
     ("SST",                          [1031025.61, 0.00, 1152543.60]),
     ("Donation",                     [0.00, 0.00, 0.00]),
 ]
-NET_OPS = [-59499.21, 1500013.11, 833010.69]
+NET_OPS = [-59499.21, 1500013.11, 1033010.69]
 
 INVESTING = [  # signed
     ("Proceeds from sale of motor vehicle",   [190125.00, 0.00, 0.00]),
     ("Interest received (Maybank pooled)",    [0.00, 0.00, 8970.22]),
-    ("Collection of Investor funds",          [720000.00, 0.00, 200000.00]),
+    ("Collection of Investor funds",          [720000.00, 0.00, 0.00]),
     ("Sale of investment securities",         [0.00, 0.00, 0.00]),
     ("Purchase of property and equipment",    [-100223.00, -17369.00, -14400.00]),
     ("Capex New Branches",                    [-2300748.36, -402958.69, -639849.95]),
     ("Placement of Fixed Deposit",            [0.00, 0.00, -2000000.00]),
     ("Purchase of investment",                [0.00, 0.00, 0.00]),
 ]
-NET_INV = [-1490846.36, -420327.69, -2445279.73]
+NET_INV = [-1490846.36, -420327.69, -2645279.73]
 
 FINANCING = [  # signed
     ("Issuance of stock",                [0.00, 0.00, 0.00]),
