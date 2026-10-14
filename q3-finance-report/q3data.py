@@ -36,19 +36,18 @@ NET_OPS = [-59499.21, 1500013.11, 1033010.69]
 INVESTING = [  # signed
     ("Proceeds from sale of motor vehicle",   [190125.00, 0.00, 0.00]),
     ("Interest received (Maybank pooled)",    [0.00, 0.00, 8970.22]),
-    ("Collection of Investor funds",          [720000.00, 0.00, 0.00]),
+    ("Collection of Investor funds",          [720000.00, 0.00, 229000.00]),  # Sep RM229K reclassified from financing
     ("Sale of investment securities",         [0.00, 0.00, 0.00]),
     ("Purchase of property and equipment",    [-100223.00, -17369.00, -14400.00]),
     ("Capex New Branches",                    [-2300748.36, -402958.69, -639849.95]),
     ("Placement of Fixed Deposit",            [0.00, 0.00, -2000000.00]),
     ("Purchase of investment",                [0.00, 0.00, 0.00]),
 ]
-NET_INV = [-1490846.36, -420327.69, -2645279.73]
+NET_INV = [-1490846.36, -420327.69, -2416279.73]
 
 FINANCING = [  # signed
     ("Issuance of stock",                [0.00, 0.00, 0.00]),
     ("Loan received",                    [0.00, 0.00, 0.00]),
-    ("Collection of Investor funds",     [0.00, 0.00, 229000.00]),
     ("Borrowing",                        [0.00, 0.00, 0.00]),
     ("Repayment from related parties",   [-79760.50, 230281.85, 15899.00]),
     ("Purchase of investment",           [-286293.00, 0.00, 0.00]),
@@ -58,7 +57,7 @@ FINANCING = [  # signed
     ("Repayment to related parties",     [0.00, 0.00, 0.00]),
     ("Pending",                          [0.00, 0.00, 0.00]),
 ]
-NET_FIN = [-759199.41, 74626.92, -107801.93]
+NET_FIN = [-759199.41, 74626.92, -336801.93]
 
 NET_CASH = [-2309544.98, 1154312.34, -1720070.97]
 OPENING = [15448390.63, 13138845.65, 14293157.99]

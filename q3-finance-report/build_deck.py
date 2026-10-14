@@ -59,7 +59,7 @@ def frame(title, headline, headline_size=11):
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
     r = p.add_run(); r.text = "Q3 2026"; r.font.name = FONT; r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = rgb(NAVY)
     text(s, L, 1.13, W, 0.32, [[(headline, True, INK, headline_size)]])
-    text(s, L, 7.3, 8, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (September revised upload)", False, MUTED, 5.5)]])
+    text(s, L, 7.3, 12, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (September revised upload). Sep RM229K investor fund reclassified from financing to investing, consistent with Jul and Q2.", False, MUTED, 5.5)]])
     return s
 
 def section_bar(s, y, label, h=0.24, size=10.5):
@@ -265,7 +265,7 @@ inv_abs = sum(abs(x) for _, v in INVESTING for x in v)
 rem_inv = {
     "Proceeds from sale of motor vehicle": "Disposal of motor vehicle in Jul",
     "Interest received (Maybank pooled)": "Interest from Maybank pooled account",
-    "Collection of Investor funds": "Investor fund received in Jul",
+    "Collection of Investor funds": "Investor fund; Sep reclassified from financing",
     "Sale of investment securities": "",
     "Purchase of property and equipment": "Reduced every month",
     "Capex New Branches": "For outlet expansion; Jul-26 highest",
@@ -275,12 +275,11 @@ rem_inv = {
 section_bar(s, 1.48, "Investing Activities", h=0.22, size=10.5)
 rows4 = [data_row(n, v, sum(abs(x) for x in v) / inv_abs, rem_inv[n]) for n, v in INVESTING]
 rows4.append(total_row("NET INVESTING ACTIVITIES", NET_INV, 1.0, "Sep-26 highest outflow; Aug-26 lowest"))
-table(s, L, 1.7, cols4, [0.2] * 10, hdr4, rows4, size=8, header_size=8)
+table(s, L, 1.7, cols4, [0.2] * (len(rows4) + 1), hdr4, rows4, size=8, header_size=8)
 
 fin_abs = sum(abs(x) for _, v in FINANCING for x in v)
 rem_fin = {
     "Issuance of stock": "", "Loan received": "No new loan in Q3",
-    "Collection of Investor funds": "Investor fund recorded under financing in Sep",
     "Borrowing": "",
     "Repayment from related parties": f"Net outflow in Jul; {K(230281.85)} received in Aug",
     "Purchase of investment": "Jul only (recorded under financing)",
@@ -292,7 +291,7 @@ rem_fin = {
 section_bar(s, 3.86, "Financing Activities", h=0.22, size=10.5)
 rows5 = [data_row(n, v, sum(abs(x) for x in v) / fin_abs, rem_fin[n]) for n, v in FINANCING]
 rows5.append(total_row("NET FINANCING ACTIVITIES", NET_FIN, 1.0, "Aug-26 positive; Jul-26 lowest"))
-table(s, L, 4.08, cols4, [0.2] * 13, hdr4, rows5, size=8, header_size=8)
+table(s, L, 4.08, cols4, [0.2] * (len(rows5) + 1), hdr4, rows5, size=8, header_size=8)
 
 prs.save(OUT)
 print("saved", OUT, "| rec", rec_q, "paid", paid_q, "capex", capex, "sst", sst, "top", [(n, round(sum(v))) for n, v in top])
