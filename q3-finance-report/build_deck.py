@@ -59,7 +59,7 @@ def frame(title, headline, headline_size=11):
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
     r = p.add_run(); r.text = "Q3 2026"; r.font.name = FONT; r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = rgb(NAVY)
     text(s, L, 1.13, W, 0.32, [[(headline, True, INK, headline_size)]])
-    text(s, L, 7.3, 12, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (latest revised upload)", False, MUTED, 5.5)]])
+    text(s, L, 7.3, 12, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (latest revised upload). Sep interest received (RM8,970.22) shown under financing; statement shows it under investing.", False, MUTED, 5.5)]])
     return s
 
 def section_bar(s, y, label, h=0.24, size=10.5):
@@ -267,7 +267,6 @@ hdr4 = ["Account", "Jul-26", "Aug-26", "Sep-26", "Q3 Total", "% / Q3", "Compare 
 inv_abs = sum(abs(x) for _, v in INVESTING for x in v)
 rem_inv = {
     "Proceeds from sale of motor vehicle": "Disposal of motor vehicle in Jul",
-    "Interest received (Maybank pooled)": "Interest from Maybank pooled account",
         "Sale of investment securities": "",
     "Purchase of property and equipment": "Jul truck & phone; reduced every month",
     "Capex New Branches": "For outlet expansion; Jul-26 highest",
@@ -285,6 +284,7 @@ rem_fin = {
     "Issuance of stock": "", "Loan received": "No new loan in Q3",
     "Borrowing": "",
     "Collection of Investor funds": "Jul: Dungun 120K, Pekan 600K; Sep: Imam Khairi 169K, PG 60K",
+    "Interest received (Maybank pooled)": "Interest from Maybank pooled account (Sep)",
     "Repayment from related parties": "Aug mainly Authentic RM210.6K; Sep TGCK RM8.2K",
     "Repayment of loans": "Stable at about RM155K-RM160K monthly",
     "Dividends": "",

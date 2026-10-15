@@ -36,7 +36,6 @@ NET_OPS = [45054.11, 1519603.61, 1048909.69]
 
 INVESTING = [  # signed
     ("Proceeds from sale of motor vehicle",   [190125.00, 0.00, 0.00]),
-    ("Interest received (Maybank pooled)",    [0.00, 0.00, 8970.22]),
     ("Collection of Investor funds",          [0.00, 0.00, 0.00]),
     ("Sale of investment securities",         [0.00, 0.00, 0.00]),
     ("Purchase of property and equipment",    [-100223.00, -17369.00, -14400.00]),
@@ -44,12 +43,13 @@ INVESTING = [  # signed
     ("Placement of Fixed Deposit",            [0.00, 0.00, -2000000.00]),
     ("Purchase of investment",                [-286293.00, 0.00, 0.00]),
 ]
-NET_INV = [-2497139.36, -420327.69, -2645279.73]
+NET_INV = [-2497139.36, -420327.69, -2654249.95]
 
 FINANCING = [  # signed
     ("Issuance of stock",                [0.00, 0.00, 0.00]),
     ("Loan received",                    [0.00, 0.00, 0.00]),
     ("Collection of Investor funds",     [720000.00, 0.00, 229000.00]),
+    ("Interest received (Maybank pooled)", [0.00, 0.00, 8970.22]),  # statement shows under investing; moved per management
     ("Borrowing",                        [0.00, 0.00, 0.00]),
     ("Repayment from related parties",   [0.00, 210691.35, 8189.42]),
     ("Repayment of loans",               [-159745.15, -155237.00, -159887.29]),
@@ -58,7 +58,7 @@ FINANCING = [  # signed
     ("Repayment to related parties",     [0.00, 0.00, 0.00]),
     ("Pending",                          [0.00, 0.00, 0.00]),
 ]
-NET_FIN = [142540.27, 55036.42, -123700.93]
+NET_FIN = [142540.27, 55036.42, -114730.71]
 
 NET_CASH = [-2309544.98, 1154312.34, -1720070.97]
 OPENING = [15448390.63, 13138845.65, 14293157.99]
