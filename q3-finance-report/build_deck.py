@@ -59,7 +59,7 @@ def frame(title, headline, headline_size=11):
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
     r = p.add_run(); r.text = "Q3 2026"; r.font.name = FONT; r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = rgb(NAVY)
     text(s, L, 1.13, W, 0.32, [[(headline, True, INK, headline_size)]])
-    text(s, L, 7.3, 12, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (September revised upload). Sep RM229K investor fund reclassified from financing to investing, consistent with Jul and Q2.", False, MUTED, 5.5)]])
+    text(s, L, 7.3, 12, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (latest revised upload)", False, MUTED, 5.5)]])
     return s
 
 def section_bar(s, y, label, h=0.24, size=10.5):
@@ -146,15 +146,16 @@ rd = dict(RECEIPTS); pdd = dict(PAID); invd = dict(INVESTING)
 cust_share = sum(rd["Customers & Sales"]) / rec_q
 capex = -sum(invd["Capex New Branches"])
 sst = sum(pdd["SST"])
+fd = 2e6 + 286293.00  # Sep fixed deposit placement + Jul purchase of investment (fixed deposit)
 
 # ---------- Slide 1: Cash Flow Comparison ----------
 s = frame("Financial Performance: Cash Flow Comparison",
-          f"Q3 operating cash was positive overall at {M(ops_q)}, but negative in July after a {M(pdd['SST'][0])} SST payment. "
-          f"Net cash flow was ({M(net_q)}), mainly from {M(capex)} new-branch capex and a {M(2e6)} fixed deposit placement.", 10.5)
+          f"Q3 operating cash was positive every month, totalling {M(ops_q)}. Net cash flow was ({M(net_q)}), "
+          f"mainly from {M(capex)} new-branch capex and {M(fd)} placed in fixed deposit and investment.", 10.5)
 cards = [
     ("Q3 CASH RECEIPTS", M(rec_q), INK, f"Customers & sales contribute {cust_share:.1%}", GOLD),
     ("Q3 CASH PAID", M(paid_q), INK, "Inventory + wages are key outflows", ORANGE),
-    ("NET CASH FROM OPERATIONS", M(ops_q), INK, "Negative in Jul; positive Aug-Sep", GREEN),
+    ("NET CASH FROM OPERATIONS", M(ops_q), INK, "Positive across Jul-Aug-Sep", GREEN),
     ("Q3 NET CASH FLOW", f"({M(net_q)})", RED, "Quarter total movement", NAVY),
     ("SEPT NET CASH FLOW", f"({M(NET_CASH[2])})", RED, "Sep-26 monthly movement", GOLD),
 ]
@@ -175,9 +176,9 @@ def s1row(label, vals, remark, paid=False):
 rows1 = [
     s1row("Cash Receipts", RECEIPTS_TOTAL, "Increased every month; Sep highest at " + M(RECEIPTS_TOTAL[2])),
     s1row("Cash Paid", paid_m, f"Jul highest ({M(pdd['SST'][0])} SST); Aug lowest with no SST payment"),
-    s1row("Net Cash from Operations", NET_OPS, f"Negative in Jul; Aug strongest at {M(NET_OPS[1])}"),
-    s1row("Net Investing Activities", NET_INV, f"Jul capex {M(invd['Capex New Branches'][0])}; Sep includes {M(2e6)} fixed deposit placement"),
-    s1row("Net Financing Activities", NET_FIN, f"Aug positive from {K(230281.85)} repayment from related parties"),
+    s1row("Net Cash from Operations", NET_OPS, f"Positive every month; Aug strongest at {M(NET_OPS[1])}"),
+    s1row("Net Investing Activities", NET_INV, f"Jul capex {M(invd['Capex New Branches'][0])}; Sep {M(2e6)} fixed deposit placement"),
+    s1row("Net Financing Activities", NET_FIN, "Jul includes RM720K investor funds; Sep net outflow"),
 ]
 net1 = [("Net Cash Flow", NAVY, WHITE, True, Lf)] + [(money(v), GOLD, RED if v < 0 else INK, True, R) for v in NET_CASH + [net_q]] \
        + [(f"Bank balance {M(OPENING[0])} (1 Jul) to {M(CLOSING[2])} (30 Sep)", WHITE, INK, True, C)]
@@ -187,7 +188,7 @@ rect(s, L, 6.35, W, 0.48, WHITE, BORDER)
 text(s, L + 0.12, 6.35, W - 0.24, 0.48,
      [[("KEY TAKEAWAY ", True, MUTED, 8),
        (f"Cash receipts grew every month from {M(RECEIPTS_TOTAL[0])} to {M(RECEIPTS_TOTAL[2])}, but SST payments in July and September ({M(sst)} combined) "
-        f"and new-branch capex of {M(capex)} pulled cash down. {M(2e6)} of the decline was placed in fixed deposit, not spent.", True, INK, 8)]],
+        f"and new-branch capex of {M(capex)} pulled cash down. {M(fd)} went into fixed deposit and investment, not spent.", True, INK, 8)]],
      anchor=MSO_ANCHOR.MIDDLE)
 
 # ---------- Slide 2: Cash Receipts ----------
@@ -230,7 +231,7 @@ rem3 = {
     "Operation": "No payment in Q3",
     "Marketing": "Aug-26 highest; Sep-26 lowest",
     "Profit sharing": "Aug-26 highest; Jul-26 lowest",
-    "Wage expenses": "Stable at RM1.78M-RM1.83M monthly",
+    "Wage expenses": "Stable at RM1.72M-RM1.77M monthly",
     "Bank Charges": "Minimal",
     "Income taxes": "Stable monthly RM250K",
     "New Branches Expenses": "Reduced every month",
@@ -259,20 +260,19 @@ text(s, L + 0.12, 6.6, W - 0.24, 0.48,
 
 # ---------- Slide 4: Investing & Financing ----------
 s = frame("Financial Performance: Investing & Financing Comparison",
-          f"New-branch capex ({M(capex)}) and a {M(2e6)} fixed deposit placement in September drove investing outflows. "
-          "Financing was positive only in August, from related-party repayments.", 9.5)
-cols4 = [3.0, 1.35, 1.35, 1.35, 1.45, 0.75, 3.52]
+          f"New-branch capex ({M(capex)}) and {M(fd)} placed in fixed deposits drove investing outflows. "
+          "Financing was positive in Jul-Aug, helped by RM949K investor funds.", 9.5)
+cols4 = [2.55, 1.3, 1.3, 1.3, 1.4, 0.75, 4.17]
 hdr4 = ["Account", "Jul-26", "Aug-26", "Sep-26", "Q3 Total", "% / Q3", "Compare / Remarks"]
 inv_abs = sum(abs(x) for _, v in INVESTING for x in v)
 rem_inv = {
     "Proceeds from sale of motor vehicle": "Disposal of motor vehicle in Jul",
     "Interest received (Maybank pooled)": "Interest from Maybank pooled account",
-    "Collection of Investor funds": "Investor fund; Sep reclassified from financing",
-    "Sale of investment securities": "",
-    "Purchase of property and equipment": "Reduced every month",
+        "Sale of investment securities": "",
+    "Purchase of property and equipment": "Jul truck & phone; reduced every month",
     "Capex New Branches": "For outlet expansion; Jul-26 highest",
     "Placement of Fixed Deposit": "RM2.0M placed in fixed deposit in Sep",
-    "Purchase of investment": "",
+    "Purchase of investment": "Jul fixed deposit (per accounts remark)",
 }
 section_bar(s, 1.5, "Investing Activities", h=0.26, size=11)
 rows4 = [data_row(n, v, sum(abs(x) for x in v) / inv_abs, rem_inv[n]) for n, v in nonzero(INVESTING)]
@@ -284,16 +284,16 @@ fin_abs = sum(abs(x) for _, v in FINANCING for x in v)
 rem_fin = {
     "Issuance of stock": "", "Loan received": "No new loan in Q3",
     "Borrowing": "",
-    "Repayment from related parties": f"Net outflow in Jul; {K(230281.85)} received in Aug",
-    "Purchase of investment": "Jul only (recorded under financing)",
+    "Collection of Investor funds": "Jul: Dungun 120K, Pekan 600K; Sep: Imam Khairi 169K, PG 60K",
+    "Repayment from related parties": "Aug mainly Authentic RM210.6K; Sep TGCK RM8.2K",
     "Repayment of loans": "Stable at about RM155K-RM160K monthly",
     "Dividends": "",
-    "Advance to related parties": "Jul-26 highest; Aug-26 minimal",
+    "Advance to related parties": "Jul: Bebeks 193.7K, Authentic 168.6K; Sep: Rindu Rasa 188.6K",
     "Repayment to related parties": "", "Pending": "",
 }
 section_bar(s, fin_y, "Financing Activities", h=0.26, size=11)
 rows5 = [data_row(n, v, sum(abs(x) for x in v) / fin_abs, rem_fin[n]) for n, v in nonzero(FINANCING)]
-rows5.append(total_row("NET FINANCING ACTIVITIES", NET_FIN, 1.0, "Aug-26 positive; Jul-26 lowest"))
+rows5.append(total_row("NET FINANCING ACTIVITIES", NET_FIN, 1.0, "Positive Jul-Aug; Sep-26 net outflow"))
 table(s, L, fin_y + 0.26, cols4, [0.3] * (len(rows5) + 1), hdr4, rows5, size=9.5, header_size=9.5)
 
 prs.save(OUT)
