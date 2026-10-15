@@ -59,7 +59,7 @@ def frame(title, headline, headline_size=11):
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
     r = p.add_run(); r.text = "Q3 2026"; r.font.name = FONT; r.font.bold = True; r.font.size = Pt(9); r.font.color.rgb = rgb(NAVY)
     text(s, L, 1.13, W, 0.32, [[(headline, True, INK, headline_size)]])
-    text(s, L, 7.3, 12, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (latest revised upload). Sep interest received (RM8,970.22) shown under financing; statement shows it under investing.", False, MUTED, 5.5)]])
+    text(s, L, 7.3, 12, 0.15, [[("Source: TGFB Cash Flow Statement PDFs for July, August and September 2026 (latest revised upload). Adjusted from statements: Sep interest received (RM8,970.22) shown under financing instead of investing; Jul Bebeks (RM193,746.06) shown as repayment to related parties instead of advance.", False, MUTED, 5.5)]])
     return s
 
 def section_bar(s, y, label, h=0.24, size=10.5):
@@ -288,8 +288,8 @@ rem_fin = {
     "Repayment from related parties": "Aug mainly Authentic RM210.6K; Sep TGCK RM8.2K",
     "Repayment of loans": "Stable at about RM155K-RM160K monthly",
     "Dividends": "",
-    "Advance to related parties": "Jul: Bebeks 193.7K, Authentic 168.6K; Sep: Rindu Rasa 188.6K",
-    "Repayment to related parties": "", "Pending": "",
+    "Advance to related parties": "Jul: Authentic 168.6K, TGL 27.9K; Sep: Rindu Rasa 188.6K",
+    "Repayment to related parties": "Jul: Bebeks (investor fund Suhaib transferred)", "Pending": "",
 }
 section_bar(s, fin_y, "Financing Activities", h=0.26, size=11)
 rows5 = [data_row(n, v, sum(abs(x) for x in v) / fin_abs, rem_fin[n]) for n, v in nonzero(FINANCING)]

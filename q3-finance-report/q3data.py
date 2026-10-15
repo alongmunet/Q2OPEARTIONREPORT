@@ -54,8 +54,8 @@ FINANCING = [  # signed
     ("Repayment from related parties",   [0.00, 210691.35, 8189.42]),
     ("Repayment of loans",               [-159745.15, -155237.00, -159887.29]),
     ("Dividends",                        [0.00, 0.00, 0.00]),
-    ("Advance to related parties",       [-417714.58, -417.93, -201003.06]),
-    ("Repayment to related parties",     [0.00, 0.00, 0.00]),
+    ("Advance to related parties",       [-223968.52, -417.93, -201003.06]),
+    ("Repayment to related parties",     [-193746.06, 0.00, 0.00]),  # Jul Bebeks, moved from advance per management
     ("Pending",                          [0.00, 0.00, 0.00]),
 ]
 NET_FIN = [142540.27, 55036.42, -114730.71]
